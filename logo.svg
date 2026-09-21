@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Electrotrans Engineering and Contractor logo</title>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d7bf4" />
+      <stop offset="100%" stop-color="#03c3b0" />
+    </linearGradient>
+  </defs>
+  <rect width="80" height="80" rx="20" fill="url(#grad)" />
+  <path d="M45 25 L65 25 L55 55 Z" fill="#fff" />
+  <path d="M85 22 H135 L150 55 H120 L110 35 H95" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="90" y="72" fill="#fff" font-family="Arial, sans-serif" font-size="18" font-weight="700">ET</text>
+</svg>
