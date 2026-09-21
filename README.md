@@ -45,18 +45,18 @@ Electrotrans/
 ├── index.html              # Homepage
 ├── contact.html            # Contact page with request form
 ├── styles.css              # Shared styling
-├── script.js               # Contact form validation (opens mail client)
-├── logo.svg                # Logo source file
+├── script.js               # Contact form validation + mobile menu
 ├── assets/
-│   ├── logo-transparent.png  # Logo used across the site (also favicon)
-│   ├── logo.jpg
-│   └── logo.svg             # Extra logo copies
-└── services/
-    ├── hydraulics.html
-    ├── pneumatics.html
-    ├── mechanical.html
-    ├── electrical.html
-    └── haulage.html
+│   └── logo-transparent.png  # Logo used across the site (also favicon)
+├── images/                 # Company photos (added as provided)
+├── services/
+│   ├── hydraulics.html
+│   ├── pneumatics.html
+│   ├── mechanical.html
+│   ├── electrical.html
+│   └── haulage.html
+└── .github/workflows/
+    └── deploy-pages.yml    # GitHub Pages deployment
 ```
 
 ## How to run
@@ -71,6 +71,10 @@ python -m http.server 8000
 ```
 
 Then open `http://localhost:8000` in your browser.
+
+## Deployment
+
+The site builds automatically to GitHub Pages on every push to `master` (via the included GitHub Actions workflow). Live URL: `https://temmyadekunle.github.io/Electrotrans/`.
 
 ## Contact details on site
 

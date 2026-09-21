@@ -69,6 +69,22 @@ img {
   width: auto;
   display: block;
 }
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: .55rem .65rem;
+  border: 1px solid var(--border);
+  border-radius: .85rem;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+.menu-toggle-bar {
+  width: 22px;
+  height: 2px;
+  background: var(--yellow);
+  border-radius: 2px;
+}
 h1 {
   margin: 0;
   font-size: clamp(2.2rem, 2.5vw, 3.4rem);
@@ -255,7 +271,15 @@ h1 {
     align-items: stretch;
   }
   .main-nav {
+    display: none;
     width: 100%;
+  }
+  .main-nav.open {
+    display: flex;
+  }
+  .menu-toggle {
+    display: flex;
+    align-self: flex-start;
   }
   .main-nav a {
     width: 100%;

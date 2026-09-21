@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
+  var toggle = document.querySelector('.menu-toggle');
+  var nav = document.querySelector('.main-nav');
+  if (toggle && nav) {
+    var setOpen = function (open) {
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', function () {
+      setOpen(!nav.classList.contains('open'));
+    });
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        setOpen(false);
+      });
+    });
+  }
+
   var form = document.querySelector('form[data-validate]');
   if (!form) return;
 
