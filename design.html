@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Design preview — Electrotrans Engineering and Contractor</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="assets/logo-transparent.png" />
+  <meta name="description" content="Visual design preview for the Electrotrans website — colors, typography, buttons and form controls in one place." />
+  <style>
+    .swatches,
+    .sample-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .swatch {
+      border: 1px solid var(--border);
+      border-radius: 1.1rem;
+      padding: 1rem;
+      background: rgba(12, 22, 44, 0.92);
+    }
+    .swatch-chip {
+      height: 64px;
+      border-radius: .75rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin-bottom: .8rem;
+    }
+    .swatch code {
+      display: block;
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: .2rem;
+    }
+    .sample-card {
+      border: 1px solid var(--border);
+      border-radius: 1.4rem;
+      padding: 1.7rem;
+      background: rgba(12, 22, 44, 0.92);
+      box-shadow: 0 28px 95px rgba(0, 0, 0, .23);
+    }
+    .sample-card .stars {
+      margin-top: 0;
+    }
+    .type-row {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .type-row:last-child {
+      border-bottom: 0;
+    }
+    .type-label {
+      display: inline-block;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin: 0 0 .45rem;
+    }
+    .field {
+      display: grid;
+      gap: .4rem;
+      margin-bottom: 1.1rem;
+    }
+    .field label {
+      font-size: .92rem;
+      color: var(--nav-text);
+      font-weight: 600;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      font: inherit;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: .95rem;
+      padding: .85rem 1rem;
+      width: 100%;
+    }
+    .field select {
+      appearance: none;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--yellow);
+      box-shadow: 0 0 0 3px var(--yellow-soft);
+    }
+    .field textarea {
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo-link" href="index.html">
+        <img class="site-logo" src="assets/logo-transparent.png" alt="Electrotrans Engineering and Contractor logo" />
+      </a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About us</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="#colors">Colors</a>
+        <a href="#typography">Typography</a>
+        <a href="#buttons">Buttons</a>
+        <a href="#inputs">Inputs</a>
+        <a class="cta" href="contact.html">Contact us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="colors" class="overview">
+      <div class="section-head">
+        <h2>Colors</h2>
+        <p>Core palette — dark industrial theme with a signalling yellow accent.</p>
+      </div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#08142b"></div>
+          <strong>--bg</strong>
+          <code>#08142b</code>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:rgba(11,21,47,.98)"></div>
+          <strong>--surface</strong>
+          <code>rgba(11,21,47,.98)</code>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:rgba(15,28,60,.88)"></div>
+          <strong>--surface-soft</strong>
+          <code>rgba(15,28,60,.88)</code>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#eef2f5"></div>
+          <strong>--text</strong>
+          <code>#eef2f5</code>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#b8c3d6"></div>
+          <strong>--muted</strong>
+          <code>#b8c3d6</code>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#f9d31d"></div>
+          <strong>--yellow</strong>
+          <code>#f9d31d</code>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:rgba(249,211,29,.16)"></div>
+          <strong>--yellow-soft</strong>
+          <code>rgba(249,211,29,.16)</code>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:rgba(249,211,29,.28)"></div>
+          <strong>--border</strong>
+          <code>rgba(249,211,29,.28)</code>
+        </div>
+      </div>
+    </section>
+
+    <section id="typography" class="overview">
+      <div class="section-head">
+        <h2>Typography</h2>
+        <p>Inter / system-ui stack — display, headings, body and meta text.</p>
+      </div>
+      <div class="sample-card">
+        <div class="type-row">
+          <span class="type-label">Display / hero — h1</span>
+          <h1 style="font-size:clamp(2.2rem,2.5vw,3.4rem);margin:0">Trusted heavy equipment engineering.</h1>
+        </div>
+        <div class="type-row">
+          <span class="type-label">Section heading — h2</span>
+          <h2 style="margin:.4rem 0 0">What we deliver</h2>
+        </div>
+        <div class="type-row">
+          <span class="type-label">Card title — h3</span>
+          <div class="card" style="padding:1.2rem;cursor:default">
+            <h3 style="margin:0 0 .5rem">Hydraulics</h3>
+            <p style="margin:0">Pump repair, cylinder rebuilds, valve diagnostics, and custom fluid power systems.</p>
+          </div>
+        </div>
+        <div class="type-row">
+          <span class="type-label">Body copy</span>
+          <p style="margin:.3rem 0 0;color:#cbd1db">Based in Ifo, Ogun State, Nigeria, we deliver hiring, haulage, repairs, servicing, maintenance, and heavy equipment sales globally.</p>
+        </div>
+        <div class="type-row">
+          <span class="type-label">Muted / meta</span>
+          <p style="margin:.3rem 0 0;color:var(--muted)">Meta text muted color — captions and secondary information.</p>
+        </div>
+        <div class="type-row">
+          <span class="type-label">Inline link</span>
+          <p style="margin:.3rem 0 0"><a class="text-link" href="#">Explore services &rarr;</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="buttons" class="overview">
+      <div class="section-head">
+        <h2>Buttons</h2>
+        <p>Primary action, navigation CTA and text link.</p>
+      </div>
+      <div class="sample-grid">
+        <div class="sample-card">
+          <span class="type-label">Primary — .button</span>
+          <p style="margin:.9rem 0 1.3rem">Big yellow action button used for the main calls to action.</p>
+          <a class="button" href="#">Contact Electrotrans</a>
+        </div>
+        <div class="sample-card">
+          <span class="type-label">Navigation CTA — .main-nav .cta</span>
+          <p style="margin:.9rem 0 1.3rem">Highlighted nav item, sits right of the menu.</p>
+          <a class="button cta" href="#" style="box-shadow:0 14px 40px rgba(0,0,0,.18)">Contact us</a>
+        </div>
+        <div class="sample-card">
+          <span class="type-label">Text link — .text-link</span>
+          <p style="margin:.9rem 0 1.3rem">Quiet, underlined-on-hover link for secondary navigation.</p>
+          <a class="text-link" href="#">Learn more &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="inputs" class="overview">
+      <div class="section-head">
+        <h2>Form inputs</h2>
+        <p>Control styling used on the contact form: focus ring highlights in yellow.</p>
+      </div>
+      <div class="sample-card" style="max-width:640px">
+        <form action="#" method="get">
+          <div class="field">
+            <label for="demo-name">Full name</label>
+            <input id="demo-name" type="text" name="demo-name" placeholder="Enter your full name" />
+          </div>
+          <div class="field">
+            <label for="demo-email">Email address</label>
+            <input id="demo-email" type="email" name="demo-email" placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <label for="demo-service">Service needed</label>
+            <select id="demo-service" name="demo-service">
+              <option value="">Choose a service</option>
+              <option>Hydraulics</option>
+              <option>Pneumatics</option>
+              <option>Mechanical</option>
+              <option>Electrical</option>
+              <option>Haulage</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="demo-message">Message</label>
+            <textarea id="demo-message" name="demo-message" rows="4" placeholder="Tell us about your project..."></textarea>
+          </div>
+          <button class="button" type="submit">Send request</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p>Electrotrans Engineering and Contractor &bull; 51 Igbusi Road, Igbusi Area, close to F&amp;G Events Centre, Iyana Ilogbo bus stop, Ifo, Ogun State, Nigeria.</p>
+        <p>Tel: 08033725117 &bull; 08028368539</p>
+        <div class="footer-socials">
+          <a class="social-link" href="https://facebook.com/electrotrans" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h2.5V5H14c-2.2 0-4 1.8-4 4v1.5H7.5V14H10v6h3v-6h2.5l.5-3.5H13V9c0-.6.4-1 1-1z"/></svg>
+            Facebook
+          </a>
+          <a class="social-link" href="https://youtube.com" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>
+            YouTube
+          </a>
+        </div>
+      </div>
+      <p><a class="text-link" href="contact.html">Contact us</a></p>
+    </div>
+  </footer>
+</body>
+</html>
