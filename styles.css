@@ -295,8 +295,24 @@ h1 {
   color: #cbd2dd;
 }
 .footer-inner {
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
+}
+.footer-cta {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  padding: 1.4rem 1.8rem;
+  background: rgba(12, 22, 44, 0.92);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+}
+.footer-cta .button {
+  min-width: 200px;
+  justify-content: center;
+  text-align: center;
 }
 .footer-socials {
   display: flex;
