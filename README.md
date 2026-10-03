@@ -1,6 +1,6 @@
 # Electrotrans Engineering and Contractor
 
-A static marketing and contact website for **Electrotrans Engineering and Contractor**, a Nigerian heavy equipment engineering and contracting company based in Ifo, Ogun State, Nigeria.
+A static marketing and contact website for **Electrotrans Engineering and Contractor**, a Nigerian heavy equipment engineering and contracting company with branches in Ifo, Ogun State and Ojota, Lagos, Nigeria.
 
 The site presents the company's 20+ years of experience in hydraulics, pneumatics, mechanical, electrical, and haulage services, and gives prospective clients a way to reach the business directly.
 
@@ -26,13 +26,15 @@ Before this site, prospective clients could not easily find out who Electrotrans
 
 ## Main features
 
-- **Homepage** with hero, about, mission/vision, services overview, and "why choose us" highlights
+- **Homepage** with hero, about, mission/vision, services overview, fleet preview, and "why choose us" highlights
 - **Service pages** — dedicated pages for each of the five services:
   - Hydraulics
   - Pneumatics
   - Mechanical
   - Electrical
   - Haulage
+- **Our fleet page** — equipment for hire and for sale, with indicative rates and steps for hiring
+- **Client portal** (`app.html`) — self-service hire booking, purchase enquiries, fault reporting with instant quote estimates, and general enquiries
 - **Contact page** with a validated request form that opens the visitor's email client pre-filled and addressed to the company mailbox
 - **Responsive dark theme** with a bold yellow accent, designed for readability on small and large screens
 - **Social links** (Facebook, YouTube) and full company contact details (address, phone, email) in the footer
@@ -43,11 +45,18 @@ Before this site, prospective clients could not easily find out who Electrotrans
 ```
 Electrotrans/
 ├── index.html              # Homepage
+├── about.html              # About us — who we are, mission/vision, why choose us
+├── fleet.html              # Our fleet — hire rates and sale prices
+├── portfolio.html          # Recent contracts, gallery and testimonials
+├── app.html                # Client portal (hire, buy, fault & quote, enquiry)
 ├── contact.html            # Contact page with request form
+├── design.html             # Design preview (colors, typography, buttons, inputs)
 ├── styles.css              # Shared styling
 ├── script.js               # Contact form validation + mobile menu
 ├── assets/
-│   └── logo-transparent.png  # Logo used across the site (also favicon)
+│   ├── logo-transparent.png  # Logo used across the site (also favicon)
+│   ├── ceo/                  # CEO portrait
+│   └── portfolio/            # Contract & project photos
 ├── images/                 # Company photos (added as provided)
 ├── services/
 │   ├── hydraulics.html
@@ -78,6 +87,8 @@ The site builds automatically to GitHub Pages on every push to `master` (via the
 
 ## Contact details on site
 
-- Address: 51 Igbusi Road, Igbusi Area, close to F&G Events Centre, Iyana Ilogbo bus stop, Ifo, Ogun State, Nigeria
-- Tel: 08033725117, 08028368539
+- Ogun State branch: Iyana Ilogbo, Ifo, Ogun State
+- Lagos branch: Ojota, Ikorodu Rd, Lagos
+- Tel: 08033725117
+- WhatsApp: 07057680842
 - Email: cranemechatronics4sure@outlook.com
