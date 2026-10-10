@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — Electrotrans Enquiries</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  :root { color-scheme: dark; }
+  body { background: linear-gradient(180deg, #08142b 0%, #07102a 40%, #03060d 100%); font-family: Inter, system-ui, sans-serif; color: var(--text); margin: 0; }
+  .admin-shell { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.2rem 4rem; }
+  .admin-top { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 1.8rem; }
+  .admin-top h1 { margin: 0; font-size: 1.7rem; }
+  .admin-sub { color: var(--muted); margin: .35rem 0 0; }
+  .login-box {
+    max-width: 420px; margin: 12vh auto 0; border: 1px solid var(--border);
+    border-radius: 1.3rem; padding: 2rem; background: rgba(12, 22, 44, 0.92);
+    box-shadow: 0 28px 95px rgba(0, 0, 0, 0.3);
+  }
+  .login-box h2 { margin: 0 0 1.2rem; }
+  .login-box label { display: grid; gap: .4rem; font-weight: 600; color: var(--nav-text); margin-bottom: 1rem; }
+  .login-box input { font: inherit; color: var(--text); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: .9rem; padding: .75rem 1rem; width: 100%; }
+  .login-msg { margin-top: .9rem; font-size: .92rem; }
+  .login-msg.ok { color: #7ee2a8; }
+  .login-msg.err { color: #ff9b9b; }
+  .admin-tabs { display: flex; gap: .5rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
+  .admin-tabs button {
+    font: inherit; font-weight: 700; cursor: pointer; padding: .6rem 1.1rem; border-radius: .9rem;
+    border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.06); color: var(--nav-text);
+  }
+  .admin-tabs button.active { background: var(--yellow); color: #07112c; border-color: transparent; }
+  .admin-rows { display: grid; gap: 1rem; }
+  .admin-row {
+    border: 1px solid var(--border); border-radius: 1.1rem; padding: 1.2rem 1.3rem;
+    background: rgba(12, 22, 44, 0.92);
+  }
+  .admin-row h3 { margin: 0 0 .35rem; font-size: 1.05rem; color: #f6f4eb; }
+  .admin-row .meta { color: var(--muted); font-size: .88rem; margin: 0 0 .7rem; }
+  .admin-row .body { color: #dfe6f1; line-height: 1.6; margin: 0 0 .9rem; }
+  .admin-row .mono { font-family: ui-monospace, Consolas, monospace; color: var(--yellow); }
+  .pill {
+    display: inline-block; padding: .22rem .7rem; border-radius: 999px; font-size: .78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .pill.new { background: rgba(249,211,29,.18); color: var(--yellow); }
+  .pill.done { background: rgba(126,226,168,.18); color: #7ee2a8; }
+  .pill.seen { background: rgba(255,255,255,.12); color: var(--nav-text); }
+  .admin-row .actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .admin-row .actions button {
+    font: inherit; cursor: pointer; font-size: .88rem; padding: .45rem .9rem; border-radius: .7rem;
+    border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); color: var(--nav-text);
+  }
+  .admin-row .actions button:hover { background: var(--yellow-soft); color: #fff; }
+  .empty { color: var(--muted); text-align: center; padding: 3rem 0; }
+  .signout { font: inherit; cursor: pointer; padding: .6rem 1.2rem; border-radius: .9rem; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); color: var(--nav-text); }
+  .badge-count {
+    display: inline-block; min-width: 1.4em; text-align: center; border-radius: 999px; padding: .1rem .45rem;
+    background: var(--yellow); color: #07112c; font-size: .82rem; font-weight: 800; margin-left: .35rem;
+  }
+  @media (max-width: 600px) { .admin-top { flex-direction: column; align-items: flex-start; } }
+</style>
+</head>
+<body>
+  <div class="admin-shell">
+    <div class="admin-top">
+      <div>
+        <h1>Admin — Enquiries &amp; Requests</h1>
+        <p class="admin-sub">Submitted from the Contact form and the Client Portal (hire, buy, fault, quote).</p>
+      </div>
+      <button class="signout" id="signout" hidden>Sign out</button>
+    </div>
+
+    <section class="login-box" id="login-box">
+      <h2>Sign in</h2>
+      <p class="admin-sub">Use the admin account you created in Supabase.</p>
+      <form id="login-form">
+        <label>
+          Email
+          <input type="email" id="login-email" required autocomplete="username" />
+        </label>
+        <label>
+          Password
+          <input type="password" id="login-pass" required autocomplete="current-password" />
+        </label>
+        <button class="button" type="submit">Sign in</button>
+      </form>
+      <p class="login-msg" id="login-msg" aria-live="polite"></p>
+    </section>
+
+    <div id="admin-view" hidden>
+      <div class="admin-tabs" id="admin-tabs">
+        <button type="button" data-tab="enquiries" class="active">Enquiries<span class="badge-count" id="count-enquiries">0</span></button>
+        <button type="button" data-tab="requests">Requests<span class="badge-count" id="count-requests">0</span></button>
+      </div>
+      <div class="admin-rows" id="admin-rows"></div>
+    </div>
+  </div>
+
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/electrotrans-db.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var loginBox = document.getElementById("login-box");
+      var adminView = document.getElementById("admin-view");
+      var signoutBtn = document.getElementById("signout");
+      var rows = document.getElementById("admin-rows");
+      var msg = document.getElementById("login-msg");
+      var activeTab = "enquiries";
+      var cache = { enquiries: [], requests: [] };
+
+      function setMsg(text, ok) {
+        msg.textContent = text || "";
+        msg.className = "login-msg " + (ok ? "ok" : ok === false ? "err" : "");
+      }
+
+      function renderList() {
+        var items = cache[activeTab] || [];
+        document.getElementById("count-" + activeTab).textContent = items.length;
+        rows.innerHTML = "";
+        if (!items.length) {
+          var empty = document.createElement("p");
+          empty.className = "empty";
+          empty.textContent = "No submissions yet in this tab.";
+          rows.appendChild(empty);
+          return;
+        }
+        items.forEach(function (item) {
+          var el = document.createElement("article");
+          el.className = "admin-row";
+          var isReq = activeTab === "requests";
+          var title = isReq
+            ? (item.kind ? item.kind.toUpperCase() + (item.equipment ? " — " + item.equipment : "") : "Request")
+            : (item.name + (item.company ? " (" + item.company + ")" : ""));
+          var meta = isReq
+            ? new Date(item.created_at).toLocaleString() + " &middot; Ref " + (item.ref || "—") + (item.name ? " &middot; " + item.name : "") + (item.phone ? " &middot; " + item.phone : "")
+            : new Date(item.created_at).toLocaleString() + " &middot; " + item.service + (item.phone ? " &middot; " + item.phone : "");
+          var body = isReq
+            ? (item.details || "")
+            : (item.message || "");
+          var statusPill = item.status === "done"
+            ? '<span class="pill done">done</span>'
+            : item.status === "seen"
+              ? '<span class="pill seen">seen</span>'
+              : '<span class="pill new">new</span>';
+          el.innerHTML =
+            "<h3>" + title + "</h3>" +
+            "<p class='meta'>" + meta + "</p>" +
+            (body ? "<p class='body'>" + body + "</p>" : "") +
+            (isReq && item.files ? "<p class='body'>Files attached: " + item.files + "</p>" : "") +
+            "<p class='mono'>" + item.email + "</p>" +
+            "<div class='actions'><button type='button' data-table='" + (isReq ? "requests" : "enquiries") + "' data-id='" + item.id + "' data-status='seen'>Mark seen</button><button type='button' data-table='" + (isReq ? "requests" : "enquiries") + "' data-id='" + item.id + "' data-status='done'>Mark done</button></div>" +
+            statusPill;
+          rows.appendChild(el);
+        });
+      }
+
+      function load(tab) {
+        return window.ElectrotransDB.adminFetch(tab).then(function (res) {
+          if (res.error) throw res.error;
+          cache[tab] = res.data || [];
+          renderList();
+        });
+      }
+
+      function switchTab(tab) {
+        activeTab = tab;
+        document.querySelectorAll("#admin-tabs button").forEach(function (b) {
+          b.classList.toggle("active", b.getAttribute("data-tab") === tab);
+        });
+        if (cache[tab].length) renderList();
+        else load(tab).catch(function (e) { setMsg("Load failed: " + e.message, false); });
+      }
+
+      document.getElementById("login-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = document.getElementById("login-email").value.trim();
+        var pass = document.getElementById("login-pass").value;
+        var btn = e.target.querySelector("button[type=submit]");
+        btn.disabled = true;
+        setMsg("Signing in…", true);
+        window.ElectrotransDB.signIn(email, pass).then(function (res) {
+          if (res.error) throw res.error;
+          setMsg("", true);
+        }).catch(function (err) {
+          setMsg(err.message || "Sign in failed", false);
+          btn.disabled = false;
+        });
+      });
+
+      document.getElementById("signout").addEventListener("click", function () {
+        window.ElectrotransDB.signOut().then(function () {
+          loginBox.hidden = false;
+          adminView.hidden = true;
+          signoutBtn.hidden = true;
+        });
+      });
+
+      document.getElementById("admin-rows").addEventListener("click", function (e) {
+        var btn = e.target.closest("button[data-table]");
+        if (!btn) return;
+        var table = btn.getAttribute("data-table");
+        var id = btn.getAttribute("data-id");
+        var status = btn.getAttribute("data-status");
+        window.ElectrotransDB.adminUpdateStatus(table, id, status).then(function (res) {
+          if (res.error) throw res.error;
+          return load(activeTab);
+        }).catch(function (err) { alert("Update failed: " + err.message); });
+      });
+
+      document.getElementById("admin-tabs").addEventListener("click", function (e) {
+        var btn = e.target.closest("button[data-tab]");
+        if (btn) switchTab(btn.getAttribute("data-tab"));
+      });
+
+      window.ElectrotransDB.onAuthChange(function (event) {
+        if (event === "SIGNED_IN") {
+          loginBox.hidden = true;
+          adminView.hidden = false;
+          signoutBtn.hidden = false;
+          load(activeTab).catch(function (e) { alert("Load failed: " + e.message); });
+        } else if (event === "SIGNED_OUT") {
+          cache = { enquiries: [], requests: [] };
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

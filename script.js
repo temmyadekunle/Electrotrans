@@ -44,18 +44,59 @@ document.addEventListener('DOMContentLoaded', function () {
     var name = form.querySelector('[name="name"]').value.trim();
     var email = form.querySelector('[name="email"]').value.trim();
     var company = form.querySelector('[name="company"]').value.trim();
+    var phone = form.querySelector('[name="phone"]').value.trim();
     var service = form.querySelector('[name="service"]').value.trim();
     var messageText = form.querySelector('[name="message"]').value.trim();
-    var subject = encodeURIComponent('New service request from ' + name);
-    var body = encodeURIComponent(
-      'Name: ' + name + '\n' +
-      'Email: ' + email + '\n' +
-      'Company: ' + company + '\n' +
-      'Service needed: ' + service + '\n\n' +
-      'Message:\n' + messageText
-    );
-    var mailtoLink = 'mailto:cranemechatronics4sure@outlook.com?subject=' + subject + '&body=' + body;
+    var messageEl = form.querySelector('.form-message');
 
-    window.location.href = mailtoLink;
+    function savedLocally() {
+      var subject = encodeURIComponent('New service request from ' + name);
+      var body = encodeURIComponent(
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Company: ' + company + '\n' +
+        'Phone: ' + phone + '\n' +
+        'Service needed: ' + service + '\n\n' +
+        'Message:\n' + messageText
+      );
+      var mailtoLink = 'mailto:cranemechatronics4sure@outlook.com?subject=' + subject + '&body=' + body;
+      window.location.href = mailtoLink;
+    }
+
+    function fail(message) {
+      if (messageEl) {
+        messageEl.textContent = message || 'Something went wrong. Please try again or email us directly.';
+      }
+    }
+
+    form.querySelector('button[type="submit"]').disabled = true;
+
+    var db = window.ElectrotransDB;
+    if (!db) { savedLocally(); return; }
+
+    db.insert('enquiries', {
+      name: name,
+      email: email,
+      company: company || null,
+      phone: phone || null,
+      service: service,
+      message: messageText
+    }).then(function (res) {
+      if (res.error) throw res.error;
+      if (messageEl) {
+        messageEl.textContent = 'Thank you, ' + name + '. Your enquiry has been received — we will reply within one business day.';
+        messageEl.style.color = '#7ee2a8';
+      }
+      form.reset();
+    }).catch(function (err) {
+      if (db && db.notConfigured()) {
+        savedLocally();
+        return;
+      }
+      fail(err && err.message ? err.message : undefined);
+      console.error('Supabase insert failed:', err);
+    }).then(function () {
+      form.querySelector('button[type="submit"]').disabled = false;
+    });
   });
 });

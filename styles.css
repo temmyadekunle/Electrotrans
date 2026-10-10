@@ -44,7 +44,6 @@ img {
   backdrop-filter: blur(16px);
 }
 .header-inner,
-.footer-inner,
 .hero-content {
   display: flex;
   flex-wrap: wrap;
@@ -288,30 +287,70 @@ h1 {
 .site-footer {
   border-top: 1px solid rgba(249, 211, 29, .16);
   background: rgba(9, 16, 31, .96);
-  padding: 2rem 0 2.5rem;
+  padding: 3rem 0 0;
 }
-.site-footer p {
+.fat-footer {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+  gap: 2.2rem 2rem;
+  padding: 0 0 2.6rem;
+  align-items: start;
+}
+.ff-brand .site-logo {
+  height: 46px;
+  margin-bottom: 1rem;
+}
+.ff-tagline {
+  color: var(--muted);
+  max-width: 28rem;
+  margin: 0 0 1.2rem !important;
+}
+.ff-col h4 {
+  margin: 0 0 1rem;
+  font-size: .95rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--yellow);
+}
+.ff-col ul {
+  list-style: none;
   margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .55rem;
+}
+.ff-col a {
+  color: var(--nav-text);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.ff-col a:hover {
+  color: var(--yellow);
+}
+.ff-col li {
   color: #cbd2dd;
+  line-height: 1.5;
 }
-.footer-inner {
-  align-items: center;
-  justify-content: space-between;
+.ff-col strong {
+  color: var(--nav-text);
 }
-.footer-cta {
-  flex: none;
-  display: flex;
-  align-items: center;
+.ff-contact ul {
+  display: grid;
+  gap: .5rem;
+  margin-bottom: 1.2rem;
+}
+.ff-cta {
   justify-content: center;
-  border: 1px solid var(--border);
-  border-radius: 1.2rem;
-  padding: 1.4rem 1.8rem;
-  background: rgba(12, 22, 44, 0.92);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+  text-align: center;
 }
-.footer-cta .button {
-  min-width: 200px;
-  justify-content: center;
+.fat-bottom {
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  padding: 1.15rem 0;
+}
+.fat-bottom p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .9rem;
   text-align: center;
 }
 .footer-socials {
@@ -729,8 +768,7 @@ h1 {
     height: 260px;
   }
   .header-inner,
-  .hero-content,
-  .footer-inner {
+  .hero-content {
     flex-direction: column;
     align-items: stretch;
   }
@@ -752,10 +790,21 @@ h1 {
   .footer-socials {
     justify-content: flex-start;
   }
+  .fat-footer {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1.5rem;
+  }
+  .ff-brand {
+    grid-column: 1 / -1;
+  }
 }
 @media (max-width: 520px) {
   .card,
   .feature-list li {
     padding: 1rem;
+  }
+  .fat-footer {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
   }
 }
